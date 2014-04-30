@@ -46,6 +46,7 @@ import org.ohmage.request.document.DocumentDeletionRequest;
 import org.ohmage.request.document.DocumentReadContentsRequest;
 import org.ohmage.request.document.DocumentReadRequest;
 import org.ohmage.request.document.DocumentUpdateRequest;
+import org.ohmage.request.event.EventReadRequest;
 import org.ohmage.request.image.ImageBatchZipReadRequest;
 import org.ohmage.request.image.ImageReadRequest;
 import org.ohmage.request.mobility.MobilityAggregateReadRequest;
@@ -174,6 +175,10 @@ public final class RequestBuilder implements ServletContextAware {
 	private String apiMobilityDatesRead;
 	private String apiMobilityReadCsv;
 	private String apiMobilityUpdate;
+	
+	// RoutineSense
+	private String apiRoutineSenseEventsRead;
+	
 	
 	// Observer
 	private String apiObserverCreate;
@@ -317,6 +322,9 @@ public final class RequestBuilder implements ServletContextAware {
 		apiMobilityDatesRead = apiRoot + "/mobility/dates/read";
 		apiMobilityReadCsv = apiRoot + "/mobility/read/csv";
 		apiMobilityUpdate = apiRoot + "/mobility/update";
+		
+		// RoutineSense
+		apiRoutineSenseEventsRead = apiRoot + "/routinesense/read";
 		
 		// Observer
 		apiObserverCreate = apiRoot + "/observer/create";
@@ -525,6 +533,9 @@ public final class RequestBuilder implements ServletContextAware {
 		}
 		else if(apiMobilityUpdate.equals(requestUri)) {
 			return new MobilityUpdateRequest(httpRequest);
+		}
+		else if (apiRoutineSenseEventsRead.equals(requestUri)) {
+			return new EventReadRequest(httpRequest);
 		}
 		// Observer
 		else if(apiObserverCreate.equals(requestUri)) {

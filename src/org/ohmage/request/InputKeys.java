@@ -39,6 +39,16 @@ public final class InputKeys {
 	// Upload Data
 	public static final String DATA = "data";
 	
+	
+	// RoutineSense Extras
+	public static final String EVENT_TYPE = "event_type";
+	public static final String APP_EVENT = "app_event";
+	public static final String ACTIVITY_EVENT = "activity_event";
+	public static final String LOCATION_EVENT = "location_event";
+	public static final String CALL_EVENT = "call_event";
+	public static final String SMS_EVENT = "sms_event";
+	
+	
 	// Mobility Extras
 	public static final String SUBTYPE = "subtype";
 	public static final String MOBILITY_WITH_SENSOR_DATA = "with_sensor_data";
