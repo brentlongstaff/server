@@ -1989,9 +1989,6 @@ public class MobilityPoint implements Comparable<MobilityPoint> {
 			
 			JsonNode wifiDataObject = dataRecord.get("wifi_data");
 			if(wifiDataObject == null) {
-//				throw new DomainException(
-//					ErrorCode.MOBILITY_INVALID_WIFI_DATA,
-//					"The 'wifi_data' value is missing.");
 				wifiData = null;
 			}
 			else if(! wifiDataObject.isObject()) {
