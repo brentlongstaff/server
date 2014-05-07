@@ -378,86 +378,86 @@ public class EventReadRequest extends Request {
 			}
 			
 			// Service the read requests.
-			regularReadRequest.service();
-			if(regularReadRequest.isFailed()) {
-				return;
-			}
-			extendedReadRequest.service();
-			if(extendedReadRequest.isFailed()) {
-				return;
-			}
-			
-			LOGGER.info("Aggregating the resulting points.");
-			Collection<DataStream> regularResults = 
-				regularReadRequest.getResults();
-			for(DataStream dataStream : regularResults) {
-				MetaData metaData = dataStream.getMetaData();
-				if(metaData == null) {
-					LOGGER.info("A Mobility point is missing meta-data.");
-					continue;
-				}
-				
-				DateTime timestamp = metaData.getTimestamp();
-				if(timestamp == null) {
-					LOGGER.info(
-						"A Mobility point is missing a timestamp: " +
-							metaData.getId());
-					continue;
-				}
-				
-				try {
-					points.add(
-						new MobilityPoint(
-							dataStream, 
-							SubType.MODE_ONLY,
-							MobilityPoint.PrivacyState.PRIVATE));
-				}
-				catch(DomainException e) {
-					throw new ServiceException(
-						"One of the points was invalid.",
-						e);
-				}
-			}
-
-			Collection<DataStream> extendedResults = 
-				extendedReadRequest.getResults();
-			for(DataStream dataStream : extendedResults) {
-				MetaData metaData = dataStream.getMetaData();
-				if(metaData == null) {
-					LOGGER.info("A Mobility point is missing meta-data.");
-					continue;
-				}
-				
-				DateTime timestamp = metaData.getTimestamp();
-				if(timestamp == null) {
-					LOGGER.info(
-						"A Mobility point is missing a timestamp: " +
-							metaData.getId());
-					continue;
-				}
-				
-				try {
-					points.add(
-						new MobilityPoint(
-							dataStream, 
-							SubType.SENSOR_DATA,
-							MobilityPoint.PrivacyState.PRIVATE));
-				}
-				catch(DomainException e) {
-					throw new ServiceException(
-						"One of the points was invalid.",
-						e);
-				}
-			}
-			
-			LOGGER.info("Sorting the aggregated points.");
-			Collections.sort(points);
-			
-			// Run them through the classifier.
-			LOGGER.info("Classifying the points.");
-			MobilityServices.instance().classifyData(
-				regularReadRequest.getUser().getUsername(),
-				points);
+//			regularReadRequest.service();
+//			if(regularReadRequest.isFailed()) {
+//				return;
+//			}
+//			extendedReadRequest.service();
+//			if(extendedReadRequest.isFailed()) {
+//				return;
+//			}
+//			
+//			LOGGER.info("Aggregating the resulting points.");
+//			Collection<DataStream> regularResults = 
+//				regularReadRequest.getResults();
+//			for(DataStream dataStream : regularResults) {
+//				MetaData metaData = dataStream.getMetaData();
+//				if(metaData == null) {
+//					LOGGER.info("A Mobility point is missing meta-data.");
+//					continue;
+//				}
+//				
+//				DateTime timestamp = metaData.getTimestamp();
+//				if(timestamp == null) {
+//					LOGGER.info(
+//						"A Mobility point is missing a timestamp: " +
+//							metaData.getId());
+//					continue;
+//				}
+//				
+//				try {
+//					points.add(
+//						new MobilityPoint(
+//							dataStream, 
+//							SubType.MODE_ONLY,
+//							MobilityPoint.PrivacyState.PRIVATE));
+//				}
+//				catch(DomainException e) {
+//					throw new ServiceException(
+//						"One of the points was invalid.",
+//						e);
+//				}
+//			}
+//
+//			Collection<DataStream> extendedResults = 
+//				extendedReadRequest.getResults();
+//			for(DataStream dataStream : extendedResults) {
+//				MetaData metaData = dataStream.getMetaData();
+//				if(metaData == null) {
+//					LOGGER.info("A Mobility point is missing meta-data.");
+//					continue;
+//				}
+//				
+//				DateTime timestamp = metaData.getTimestamp();
+//				if(timestamp == null) {
+//					LOGGER.info(
+//						"A Mobility point is missing a timestamp: " +
+//							metaData.getId());
+//					continue;
+//				}
+//				
+//				try {
+//					points.add(
+//						new MobilityPoint(
+//							dataStream, 
+//							SubType.SENSOR_DATA,
+//							MobilityPoint.PrivacyState.PRIVATE));
+//				}
+//				catch(DomainException e) {
+//					throw new ServiceException(
+//						"One of the points was invalid.",
+//						e);
+//				}
+//			}
+//			
+//			LOGGER.info("Sorting the aggregated points.");
+//			Collections.sort(points);
+//			
+//			// Run them through the classifier.
+//			LOGGER.info("Classifying the points.");
+//			MobilityServices.instance().classifyData(
+//				regularReadRequest.getUser().getUsername(),
+//				points);
 		}
 		catch(ServiceException e) {
 			e.failRequest(this);
@@ -494,7 +494,7 @@ public class EventReadRequest extends Request {
 //				}
 //			}
 //			resultObject.put(JSON_KEY_DATA, resultArray);
-			String eventJSON = RoutineSense.getDayEvents(username, startDate);
+			String eventJSON = "{ \"frog\" : \"duck\"}";//RoutineSense.getDayEvents(username, startDate);
 			resultObject.put(JSON_KEY_DATA, eventJSON);
 		}
 		catch(JSONException e) {
