@@ -403,7 +403,7 @@ public final class RequestBuilder implements ServletContextAware {
 		String requestUri = httpRequest.getRequestURI();
 		
 		LOGGER.debug(requestUri);
-		
+		LOGGER.info("The request URI is " + requestUri);
 		// Config
 		if(apiConfigRead.equals(requestUri)) {
 			return new ConfigReadRequest(httpRequest);

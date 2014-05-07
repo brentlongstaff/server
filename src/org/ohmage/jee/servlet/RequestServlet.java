@@ -410,6 +410,7 @@ public class RequestServlet extends HttpServlet {
 	 */
 	@Override
 	protected final void doPost(HttpServletRequest httpRequest, HttpServletResponse httpResponse) {
+		LOGGER.info("Doing a post");
 		processRequest(httpRequest, httpResponse);
 	}
 	

@@ -335,7 +335,7 @@ public class EventReadRequest extends Request {
 			return;
 		}
 		
-		LOGGER.info("Servicing the Mobility read request.");
+		LOGGER.info("Servicing the Event read request.");
 		
 		try {
 			if((username != null) && (! username.equals(regularReadRequest.getUser().getUsername()))) {
@@ -376,7 +376,7 @@ public class EventReadRequest extends Request {
 					}
 				}
 			}
-			
+			LOGGER.info("Serviced the Event read request.");
 			// Service the read requests.
 //			regularReadRequest.service();
 //			if(regularReadRequest.isFailed()) {
