@@ -178,7 +178,7 @@ public final class RequestBuilder implements ServletContextAware {
 	
 	// RoutineSense
 	private String apiRoutineSenseEventsRead;
-	
+	private String apiRoutineSenseEventsFeedback;
 	
 	// Observer
 	private String apiObserverCreate;
@@ -537,6 +537,9 @@ public final class RequestBuilder implements ServletContextAware {
 		else if (apiRoutineSenseEventsRead.equals(requestUri)) {
 			return new EventReadRequest(httpRequest);
 		}
+//		else if (apiRoutineSenseEventsFeedback.equals(requestUri)) { // TODO do this after the other way works
+//			return new EventFeedbackRequest(httpRequest);
+//		}
 		// Observer
 		else if(apiObserverCreate.equals(requestUri)) {
 			return new ObserverCreationRequest(httpRequest);

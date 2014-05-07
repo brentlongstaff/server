@@ -139,7 +139,7 @@ public class EventReadRequest extends Request {
 	
 	
 	/**
-	 * Creates a Mobility read request.
+	 * Creates an Event read request.
 	 * 
 	 * @param httpRequest The HttpServletRequest with the parameters for this
 	 * 					  request.
@@ -260,7 +260,7 @@ public class EventReadRequest extends Request {
 				
 				// TODO forget all that stream nonsense, just call .NET from here
 				
-				String eventJSON = RoutineSense.getDayEvents(tUsername, tStartDate);
+				
 				
 				
 				// Always get all of the columns.
@@ -470,8 +470,10 @@ public class EventReadRequest extends Request {
 	 */
 	@Override
 	public void respond(HttpServletRequest httpRequest, HttpServletResponse httpResponse) {
-		LOGGER.info("Responding to the Mobiltiy read request.");
+		LOGGER.info("Responding to the Event read request.");
 
+		
+		
 		if(isFailed()) {
 			super.respond(httpRequest, httpResponse, null);
 		}
@@ -484,23 +486,25 @@ public class EventReadRequest extends Request {
 		
 		JSONObject resultObject = new JSONObject();
 		try {
-			JSONArray resultArray = new JSONArray();
-			long startDateMillis = startDate.getMillis();
-			for(MobilityPoint mobilityPoint : points) {
-				if((mobilityPoint.getTime() + mobilityPoint.getTimezone().getOffset(mobilityPoint.getTime()))>= startDateMillis) {
-					resultArray.put(mobilityPoint.toJson(true, columns));
-				}
-			}
-			resultObject.put(JSON_KEY_DATA, resultArray);
+//			JSONArray resultArray = new JSONArray();
+//			long startDateMillis = startDate.getMillis();
+//			for(MobilityPoint mobilityPoint : points) {
+//				if((mobilityPoint.getTime() + mobilityPoint.getTimezone().getOffset(mobilityPoint.getTime()))>= startDateMillis) {
+//					resultArray.put(mobilityPoint.toJson(true, columns));
+//				}
+//			}
+//			resultObject.put(JSON_KEY_DATA, resultArray);
+			String eventJSON = RoutineSense.getDayEvents(username, startDate);
+			resultObject.put(JSON_KEY_DATA, eventJSON);
 		}
 		catch(JSONException e) {
 			LOGGER.error("Error creating the JSONObject.", e);
 			setFailed();
 		}
-		catch(DomainException e) {
-			LOGGER.error("Error creating the JSONObject.", e);
-			setFailed();
-		}
+//		catch(DomainException e) {
+//			LOGGER.error("Error creating the JSONObject.", e);
+//			setFailed();
+//		}
 
 		super.respond(httpRequest, httpResponse, resultObject);
 	}
