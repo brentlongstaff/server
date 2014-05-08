@@ -494,7 +494,7 @@ public class EventReadRequest extends Request {
 //				}
 //			}
 //			resultObject.put(JSON_KEY_DATA, resultArray);
-			String eventJSON = "{ \"frog\" : \"duck\"}";//RoutineSense.getDayEvents(username, startDate);
+			String eventJSON = RoutineSense.getDayEvents(username, startDate);
 			resultObject.put(JSON_KEY_DATA, eventJSON);
 		}
 		catch(JSONException e) {
