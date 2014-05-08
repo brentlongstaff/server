@@ -12,7 +12,8 @@ import org.joda.time.DateTime;
 public class RoutineSense {
 	/*HashMap<String, ArrayList<String>>*/ public static String getDayEvents(String username, DateTime date)
 	{
-		ProcessBuilder builder = new ProcessBuilder("mono", "Loris.exe", username, date.toString());
+//		ProcessBuilder builder = new ProcessBuilder("mono", "/Loris.exe", username, date.toString());
+		ProcessBuilder builder = new ProcessBuilder("echo", "{ \"frog\" : 3 }");
 		builder.redirectErrorStream(true);
 		try {
 			Process process = builder.start();
