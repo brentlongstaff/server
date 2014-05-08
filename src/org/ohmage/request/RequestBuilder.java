@@ -324,7 +324,8 @@ public final class RequestBuilder implements ServletContextAware {
 		apiMobilityUpdate = apiRoot + "/mobility/update";
 		
 		// RoutineSense
-		apiRoutineSenseEventsRead = apiRoot + "/routinesense/read";
+		apiRoutineSenseEventsRead = apiRoot + "/event/read";
+		apiRoutineSenseEventsFeedback = apiRoot + "/event/feedback";
 		
 		// Observer
 		apiObserverCreate = apiRoot + "/observer/create";
@@ -736,6 +737,9 @@ public final class RequestBuilder implements ServletContextAware {
 				apiStreamUpload.equals(uri) ||
 				apiStreamRead.equals(uri) ||
 				apiStreamInvalidRead.equals(uri) ||
+				// Events
+				apiRoutineSenseEventsRead.equals(uri) ||
+				apiRoutineSenseEventsFeedback.equals(uri) ||
 				// OMH
 				apiOmhAuth.equals(uri) ||
 				apiOmhRegistryCreate.equals(uri) ||
