@@ -1,7 +1,9 @@
 package org.ohmage.routinesense;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -14,25 +16,36 @@ public class RoutineSense {
 	{
 //		ProcessBuilder builder = new ProcessBuilder("mono", "/Loris.exe", username, date.toString());
 		ProcessBuilder builder = new ProcessBuilder("echo", "{ \"frog\" : 3 }");
-		builder.redirectErrorStream(true);
+		
 		try {
+			builder.redirectErrorStream(true);
+			
 			Process process = builder.start();
-			StringBuffer sb = new StringBuffer();
-			InputStream in = process.getInputStream();
-			process.waitFor();
-			for (int i = 0; i < in.available(); i++)
-			{
-				sb.append(in.read() + "");
-			}
+			InputStream is = process.getInputStream();
+		    InputStreamReader isr = new InputStreamReader(is);
+		    BufferedReader br = new BufferedReader(isr);
+		    String line;
+		    StringBuffer sb = new StringBuffer();
+	        while ((line = br.readLine()) != null) 
+	        {
+	            sb.append(line);
+		    }
+			
+//			InputStream in = process.getInputStream();
+//			process.waitFor();
+//			for (int i = 0; i < in.available(); i++)
+//			{
+//				sb.append(in.read() + "");
+//			}
 			String str = sb.toString(); 
 			return "JSON which is invalid";//str;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (InterruptedException e) {
+		} /*catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 		return null;
 		
 	}
