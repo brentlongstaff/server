@@ -38,7 +38,7 @@ public class RoutineSense {
 //				sb.append(in.read() + "");
 //			}
 			String str = sb.toString(); 
-			return "JSON which is invalid";//str;
+			return str;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
