@@ -37,7 +37,9 @@ public class RoutineSense {
 //			{
 //				sb.append(in.read() + "");
 //			}
-			String str = sb.toString(); 
+			String str = sb.toString();
+			String header = "##DATASTART##";
+			str = str.substring(str.indexOf(header) + header.length());
 			return str;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
