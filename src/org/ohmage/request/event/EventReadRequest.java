@@ -495,7 +495,7 @@ public class EventReadRequest extends Request {
 //			}
 //			resultObject.put(JSON_KEY_DATA, resultArray);
 			String eventJSON = RoutineSense.getDayEvents(username, startDate);
-			resultObject.put(JSON_KEY_DATA, eventJSON);
+			resultObject.put(JSON_KEY_DATA, new JSONObject(eventJSON));
 		}
 		catch(JSONException e) {
 			LOGGER.error("Error creating the JSONObject.", e);
