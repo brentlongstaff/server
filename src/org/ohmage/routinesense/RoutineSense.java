@@ -55,9 +55,9 @@ public class RoutineSense {
 		
 	public static void storeFeedback(String username, String feedbackJson)
 	{
-		ProcessBuilder builder = new ProcessBuilder("mono", "/home/blongsta/RoutineSense/Loris.exe", username, feedbackJson);
+		ProcessBuilder builder = new ProcessBuilder("mono", "/home/blongsta/RoutineSense/Loris.exe", "feedback", username, feedbackJson);
 //		ProcessBuilder builder = new ProcessBuilder("echo", "{ \"frog\" : 3 }");
-		builder = new ProcessBuilder("/bin/sh", "-c", "ls > /tmp/testing.txt");
+//		builder = new ProcessBuilder("/bin/sh", "-c", "ls > /tmp/testing.txt");
 		try {
 //			builder.redirectErrorStream(true);
 			
