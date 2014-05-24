@@ -186,8 +186,7 @@ public class EventFeedbackSaveRequest extends Request {
 								"JSON Missing");
 					}
 //					else {
-//						tFeedbackJson = 
-//							tf
+//						feedbackJson = 
 //					}
 				}
 				else {
@@ -489,7 +488,7 @@ public class EventFeedbackSaveRequest extends Request {
 //		}
 		
 		JSONObject resultObject = new JSONObject();
-		try {
+//		try {
 //			JSONArray resultArray = new JSONArray();
 //			long startDateMillis = startDate.getMillis();
 //			for(MobilityPoint mobilityPoint : points) {
@@ -499,15 +498,15 @@ public class EventFeedbackSaveRequest extends Request {
 //			}
 //			resultObject.put(JSON_KEY_DATA, resultArray);
 			
-			resultObject.getString(JSON_KEY_DATA);
+//			resultObject.getString(JSON_KEY_DATA);
 			
-//			RoutineSense.storeFeedback(username, resultObject.getString(JSON_KEY_DATA));
+			RoutineSense.storeFeedback(username, feedbackJson);
 //			resultObject.put(JSON_KEY_DATA, new JSONObject(eventJSON));
-		}
-		catch(JSONException e) {
-			LOGGER.error("Error creating the JSONObject.", e);
-			setFailed();
-		}
+//		}
+//		catch(JSONException e) {
+//			LOGGER.error("Error creating the JSONObject.", e);
+//			setFailed();
+//		}
 //		catch(DomainException e) {
 //			LOGGER.error("Error creating the JSONObject.", e);
 //			setFailed();
