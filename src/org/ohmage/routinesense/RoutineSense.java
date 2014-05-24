@@ -57,7 +57,7 @@ public class RoutineSense {
 	{
 		ProcessBuilder builder = new ProcessBuilder("mono", "/home/blongsta/RoutineSense/Loris.exe", username, feedbackJson);
 //		ProcessBuilder builder = new ProcessBuilder("echo", "{ \"frog\" : 3 }");
-		builder = new ProcessBuilder("/bin/sh", "-c", "echo frog > /home/blongsta/RoutineSense/testing.txt");
+		builder = new ProcessBuilder("/bin/sh", "-c", "echo frog > /tmp/testing.txt");
 		try {
 			builder.redirectErrorStream(true);
 			
