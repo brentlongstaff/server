@@ -57,9 +57,9 @@ public class RoutineSense {
 	{
 		ProcessBuilder builder = new ProcessBuilder("mono", "/home/blongsta/RoutineSense/Loris.exe", username, feedbackJson);
 //		ProcessBuilder builder = new ProcessBuilder("echo", "{ \"frog\" : 3 }");
-		builder = new ProcessBuilder("/bin/sh", "-c", "echo frog > /tmp/testing.txt");
+		builder = new ProcessBuilder("/bin/sh", "-c", "ls > /tmp/testing.txt");
 		try {
-			builder.redirectErrorStream(true);
+//			builder.redirectErrorStream(true);
 			
 			Process process = builder.start();
 //			InputStream is = process.getInputStream();
@@ -82,7 +82,7 @@ public class RoutineSense {
 //			String header = "##DATASTART##";
 //			int start = str.indexOf(header) + header.length();
 //			str = str.substring(start);
-			return;
+//			return;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
