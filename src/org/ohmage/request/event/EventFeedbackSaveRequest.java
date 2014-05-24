@@ -489,22 +489,22 @@ public class EventFeedbackSaveRequest extends Request {
 //		}
 		
 		JSONObject resultObject = new JSONObject();
-//		try {
-////			JSONArray resultArray = new JSONArray();
-////			long startDateMillis = startDate.getMillis();
-////			for(MobilityPoint mobilityPoint : points) {
-////				if((mobilityPoint.getTime() + mobilityPoint.getTimezone().getOffset(mobilityPoint.getTime()))>= startDateMillis) {
-////					resultArray.put(mobilityPoint.toJson(true, columns));
-////				}
-////			}
-////			resultObject.put(JSON_KEY_DATA, resultArray);
-//			RoutineSense.storeFeedback(username, resultObject.getString(JSON_KEY_DATA));
-////			resultObject.put(JSON_KEY_DATA, new JSONObject(eventJSON));
-//		}
-//		catch(JSONException e) {
-//			LOGGER.error("Error creating the JSONObject.", e);
-//			setFailed();
-//		}
+		try {
+//			JSONArray resultArray = new JSONArray();
+//			long startDateMillis = startDate.getMillis();
+//			for(MobilityPoint mobilityPoint : points) {
+//				if((mobilityPoint.getTime() + mobilityPoint.getTimezone().getOffset(mobilityPoint.getTime()))>= startDateMillis) {
+//					resultArray.put(mobilityPoint.toJson(true, columns));
+//				}
+//			}
+//			resultObject.put(JSON_KEY_DATA, resultArray);
+			RoutineSense.storeFeedback(username, resultObject.getString(JSON_KEY_DATA));
+//			resultObject.put(JSON_KEY_DATA, new JSONObject(eventJSON));
+		}
+		catch(JSONException e) {
+			LOGGER.error("Error creating the JSONObject.", e);
+			setFailed();
+		}
 //		catch(DomainException e) {
 //			LOGGER.error("Error creating the JSONObject.", e);
 //			setFailed();

@@ -73,7 +73,7 @@ public class RoutineSense {
 //		    }
 			
 //			InputStream in = process.getInputStream();
-//			process.waitFor();
+			process.waitFor();
 //			for (int i = 0; i < in.available(); i++)
 //			{
 //				sb.append(in.read() + "");
@@ -83,7 +83,7 @@ public class RoutineSense {
 //			int start = str.indexOf(header) + header.length();
 //			str = str.substring(start);
 			return;
-		} catch (IOException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} /*catch (InterruptedException e) {
