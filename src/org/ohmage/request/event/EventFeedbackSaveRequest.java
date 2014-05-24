@@ -498,7 +498,10 @@ public class EventFeedbackSaveRequest extends Request {
 //				}
 //			}
 //			resultObject.put(JSON_KEY_DATA, resultArray);
-			RoutineSense.storeFeedback(username, resultObject.getString(JSON_KEY_DATA));
+			
+			resultObject.getString(JSON_KEY_DATA);
+			
+//			RoutineSense.storeFeedback(username, resultObject.getString(JSON_KEY_DATA));
 //			resultObject.put(JSON_KEY_DATA, new JSONObject(eventJSON));
 		}
 		catch(JSONException e) {
