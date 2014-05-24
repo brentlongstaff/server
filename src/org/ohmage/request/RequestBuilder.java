@@ -46,6 +46,7 @@ import org.ohmage.request.document.DocumentDeletionRequest;
 import org.ohmage.request.document.DocumentReadContentsRequest;
 import org.ohmage.request.document.DocumentReadRequest;
 import org.ohmage.request.document.DocumentUpdateRequest;
+import org.ohmage.request.event.EventFeedbackSaveRequest;
 import org.ohmage.request.event.EventReadRequest;
 import org.ohmage.request.image.ImageBatchZipReadRequest;
 import org.ohmage.request.image.ImageReadRequest;
@@ -538,9 +539,9 @@ public final class RequestBuilder implements ServletContextAware {
 		else if (apiRoutineSenseEventsRead.equals(requestUri)) {
 			return new EventReadRequest(httpRequest);
 		}
-//		else if (apiRoutineSenseEventsFeedback.equals(requestUri)) { // TODO do this after the other way works
-//			return new EventFeedbackRequest(httpRequest);
-//		}
+		else if (apiRoutineSenseEventsFeedback.equals(requestUri)) { // TODO do this after the other way works
+			return new EventFeedbackSaveRequest(httpRequest);
+		}
 		// Observer
 		else if(apiObserverCreate.equals(requestUri)) {
 			return new ObserverCreationRequest(httpRequest);

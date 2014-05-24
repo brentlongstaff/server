@@ -47,6 +47,7 @@ public final class InputKeys {
 	public static final String LOCATION_EVENT = "location_event";
 	public static final String CALL_EVENT = "call_event";
 	public static final String SMS_EVENT = "sms_event";
+//	public static final String FEEDBACK_JSON = "feedback";
 	
 	
 	// Mobility Extras
