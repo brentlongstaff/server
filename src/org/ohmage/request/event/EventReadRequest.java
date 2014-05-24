@@ -165,7 +165,7 @@ public class EventReadRequest extends Request {
 		if(! isFailed()) {
 			try {
 				String[] t;
-				
+				getParameters().keySet().size();
 				t = getParameterValues(InputKeys.DATE);
 				if(t.length == 0) {
 					throw new ValidationException(
