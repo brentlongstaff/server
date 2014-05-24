@@ -167,9 +167,12 @@ public class EventFeedbackSaveRequest extends Request {
 				
 				t = getParameterValues(InputKeys.DATA);
 				if(t.length == 0) {
+					String ps = "";
+					for (String k : super.getParameters().keySet())
+						ps += " " + k;
 					throw new ValidationException(
 							ErrorCode.SERVER_INVALID_JSON, 
-							"JSON Missing: " + InputKeys.DATA);
+							"JSON Missing: " + ps);
 				}
 				else if(t.length == 1) {
 					tFeedbackJson = t[0];
