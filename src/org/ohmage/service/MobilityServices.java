@@ -15,6 +15,7 @@
  ******************************************************************************/
 package org.ohmage.service;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -35,6 +36,7 @@ import org.ohmage.query.IUserMobilityQueries;
 import org.ohmage.query.IUserQueries;
 
 import edu.ucla.cens.mobilityclassifier.Classification;
+import edu.ucla.cens.mobilityclassifier.Location;
 import edu.ucla.cens.mobilityclassifier.MobilityClassifier;
 import edu.ucla.cens.mobilityclassifier.Sample;
 import edu.ucla.cens.mobilityclassifier.WifiScan;
@@ -145,9 +147,9 @@ public final class MobilityServices {
 		MobilityClassifier classifier = new MobilityClassifier();
 				
 		// Create place holders for the previous data.
-		String previousWifiMode = null;
+		Classification previousClassification = null;
 		List<WifiScan> previousWifiScans = new LinkedList<WifiScan>();
-		
+		ArrayList<Location> previousLocations = new ArrayList<Location>();
 		// This is a bit more involved now that we are doing everything through
 		// the observers.
 		/*
@@ -225,6 +227,22 @@ public final class MobilityServices {
 					}
 				}
 				
+				Location currLoc;
+				if(mobilityPoint.getLocation() == null) {
+					currLoc = null;
+				}
+				else {
+					try {
+						currLoc = new Location(mobilityPoint.getLocation().getLatitude(), mobilityPoint.getLocation().getLatitude(),
+								mobilityPoint.getTime());
+					} 
+					catch(Exception e) {
+						throw new ServiceException(
+								"The Mobility point does not contain Location data.",
+								e);
+					}
+				}
+				
 				// Prune out the old WifiScans that are more than 10 minutes 
 				// old.
 				long minPreviousTime = 
@@ -243,21 +261,39 @@ public final class MobilityServices {
 						break;
 					}
 				}
+				
+				Iterator<Location> previousLocationsIter = 
+						previousLocations.iterator();
+				while(previousLocationsIter.hasNext()) {
+					if(previousLocationsIter.next().getTime() < minPreviousTime) {
+						previousLocationsIter.remove();
+					}
+					else {
+						// Given the fact that the list is ordered, we can now
+						// be assured that all of the remaining WiFi scans are
+						// invalid.
+						break;
+					}
+				}
 
 				// Classify the data.
 				Classification classification =
 						classifier.classify(
 								samples,
 								currSensorData.getSpeed(),
-								wifiScan,
-								previousWifiScans,
-								previousWifiMode);
-				
+								wifiScan, 
+								previousWifiScans, currLoc, previousLocations,
+								previousClassification);
+				// new things: Location currLoc, ArrayList<Location> histLocs, Classification lastClassification
 				// Update the place holders for the previous data.
 				if(wifiScan != null) {
 					previousWifiScans.add(wifiScan);
 				}
-				previousWifiMode = classification.getWifiMode();
+				if (currLoc != null) {
+					previousLocations.add(currLoc);
+				}
+				
+				previousClassification = classification;
 				
 				// If the classification generated some results, pull them out
 				// and store them in the Mobility point.
