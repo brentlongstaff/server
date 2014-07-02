@@ -187,7 +187,7 @@ public final class MobilityServices {
 			}
 		}
 		*/
-		mobilityPoints.clear();
+//		mobilityPoints.clear();
 		// For each of the Mobility points,
 		for(MobilityPoint mobilityPoint : mobilityPoints) {
 			// If the data point is of type error, don't attempt to classify 
