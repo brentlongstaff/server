@@ -187,7 +187,7 @@ public final class MobilityServices {
 			}
 		}
 		*/
-//		mobilityPoints.clear();
+
 		// For each of the Mobility points,
 		for(MobilityPoint mobilityPoint : mobilityPoints) {
 			// If the data point is of type error, don't attempt to classify 
@@ -195,6 +195,7 @@ public final class MobilityServices {
 			if(mobilityPoint.getMode().equals(Mode.ERROR)) {
 				continue;
 			}
+			
 			// If the SubType is sensor data,
 			if(MobilityPoint.SubType.SENSOR_DATA.equals(mobilityPoint.getSubType())) {
 				SensorData currSensorData = mobilityPoint.getSensorData();
