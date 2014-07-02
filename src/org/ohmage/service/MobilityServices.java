@@ -303,7 +303,7 @@ public final class MobilityServices {
 								classification.getFft(), 
 								classification.getVariance(),
 								classification.getAverage(), 
-								MobilityPoint.Mode.valueOf(classification.getMode().toUpperCase()));
+								MobilityPoint.Mode.WALK);//valueOf(classification.getMode().toUpperCase()));
 					}
 					catch(DomainException e) {
 						throw new ServiceException(
@@ -315,7 +315,7 @@ public final class MobilityServices {
 				// with only the mode.
 				else {
 					try {
-						mobilityPoint.setClassifierModeOnly(MobilityPoint.Mode.valueOf(classification.getMode().toUpperCase()));
+						mobilityPoint.setClassifierModeOnly(MobilityPoint.Mode.WALK);//valueOf(classification.getMode().toUpperCase()));
 					}
 					catch(DomainException e) {
 						throw new ServiceException(
