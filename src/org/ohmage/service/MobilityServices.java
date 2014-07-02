@@ -303,7 +303,7 @@ public final class MobilityServices {
 								classification.getFft(), 
 								classification.getVariance(),
 								classification.getAverage(), 
-								MobilityPoint.Mode.valueOf("WALK"));//classification.getMode().toUpperCase()));
+								MobilityPoint.Mode.valueOf(classification.getMode().toUpperCase()));
 					}
 					catch(DomainException e) {
 						throw new ServiceException(
