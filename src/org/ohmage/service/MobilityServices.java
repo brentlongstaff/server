@@ -22,6 +22,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
+import org.apache.log4j.Logger;
 import org.joda.time.DateTime;
 import org.ohmage.annotator.Annotator.ErrorCode;
 import org.ohmage.domain.MobilityAggregatePoint;
@@ -34,6 +35,7 @@ import org.ohmage.exception.DomainException;
 import org.ohmage.exception.ServiceException;
 import org.ohmage.query.IUserMobilityQueries;
 import org.ohmage.query.IUserQueries;
+import org.ohmage.request.RequestBuilder;
 
 import edu.ucla.cens.mobilityclassifier.Classification;
 import edu.ucla.cens.mobilityclassifier.Location;
@@ -123,7 +125,8 @@ public final class MobilityServices {
 			throw new ServiceException(e);
 		}
 	}
-	
+	private static final Logger LOGGER = 
+			Logger.getLogger(MobilityServices.class);
 	/**
 	 * Runs the classifier against all of the Mobility points in the list.
 	 * 
@@ -142,7 +145,7 @@ public final class MobilityServices {
 		if(mobilityPoints == null) {
 			return;
 		}
-		
+		LOGGER.debug("mobilityPoints was not null");
 		// Create a new classifier.
 		MobilityClassifier classifier = new MobilityClassifier();
 				
@@ -187,7 +190,7 @@ public final class MobilityServices {
 			}
 		}
 		*/
-
+		LOGGER.debug("iterating through mobility points");
 		// For each of the Mobility points,
 		for(MobilityPoint mobilityPoint : mobilityPoints) {
 			// If the data point is of type error, don't attempt to classify 
@@ -221,9 +224,11 @@ public final class MobilityServices {
 						wifiScan = mobilityPoint.getWifiScan();
 					} 
 					catch(DomainException e) {
+						
 						throw new ServiceException(
 								"The Mobility point does not contain WiFi data.",
 								e);
+						
 					}
 				}
 				
@@ -233,8 +238,10 @@ public final class MobilityServices {
 				}
 				else {
 					try {
+						LOGGER.debug("Getting current location");
 						currLoc = new Location(mobilityPoint.getLocation().getLatitude(), mobilityPoint.getLocation().getLatitude(),
 								mobilityPoint.getTime());
+						LOGGER.debug("Got current location");
 					} 
 					catch(Exception e) {
 						throw new ServiceException(
@@ -275,7 +282,7 @@ public final class MobilityServices {
 						break;
 					}
 				}
-
+				LOGGER.debug("Classifying");
 				// Classify the data.
 				Classification classification =
 						classifier.classify(
@@ -284,6 +291,7 @@ public final class MobilityServices {
 								wifiScan, 
 								previousWifiScans, currLoc, previousLocations,
 								previousClassification);
+				LOGGER.debug("finished classifying");
 				// new things: Location currLoc, ArrayList<Location> histLocs, Classification lastClassification
 				// Update the place holders for the previous data.
 				if(wifiScan != null) {
@@ -306,6 +314,7 @@ public final class MobilityServices {
 								MobilityPoint.Mode.valueOf(classification.getMode().toUpperCase()));
 					}
 					catch(DomainException e) {
+						LOGGER.debug("couldn't read classification's info with features");
 						throw new ServiceException(
 								"There was a problem reading the classification's information.", 
 								e);
@@ -318,6 +327,7 @@ public final class MobilityServices {
 						mobilityPoint.setClassifierModeOnly(MobilityPoint.Mode.valueOf(classification.getMode().toUpperCase()));
 					}
 					catch(DomainException e) {
+						LOGGER.debug("couldn't read classification's info");
 						throw new ServiceException(
 								"There was a problem reading the classification's mode.", 
 								e);
